@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICY TOWER Multiplayer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    #game-container {
+      position: relative;
+      box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+    }
+    canvas {
+      background-color: black;
+      border: 2px solid #444;
+    }
+    #score-display {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+    }
+    #players-info {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      text-align: right;
+      text-shadow: 1px 1px 2px black;
+    }
+    #game-controls {
+      margin-top: 15px;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+    }
+    #game-title {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 28px;
+      color: #ff6a00;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    .key {
+      display: inline-block;
+      background-color: #444;
+      border: 1px solid #666;
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin: 0 2px;
+    }
+    .tips {
+      margin-top: 8px;
+      font-style: italic;
+      font-size: 12px;
+      color: #ff8c00;
+    }
+    .advanced-tip {
+      color: #ff4500;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .mechanic {
+      display: inline-block;
+      margin: 0 5px;
+      padding: 2px 8px;
+      background-color: rgba(255, 69, 0, 0.2);
+      border-radius: 10px;
+    }
+    .platform-legend {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    .platform-type {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .platform-color {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      border: 1px solid #555;
+    }
+    .blue { background-color: blue; }
+    .orange { background-color: orange; }
+    .gray { background-color: gray; }
+    .warning {
+      color: #ff4500;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="game-title">ICY TOWER</div>
+    <canvas id="game-canvas"></canvas>
+    <div id="score-display">Score: 0</div>
+    <div id="players-info">Players: 0</div>
+    
+    <div id="game-controls">
+      <span class="key">←</span> <span class="key">→</span> Move | 
+      <span class="key">Space</span> Jump | 
+      <span class="key">Tab</span> Spectate
+      <div>Escape the rising lava! First to the top wins!</div>
+      <div class="tips">🔥 Move diagonally for speed bonuses! 🔥</div>
+      <div class="tips">The faster you go, the more points you earn!</div>
+      
+      <div class="platform-legend">
+        <div class="platform-type"><span class="platform-color blue"></span> Normal</div>
+        <div class="platform-type"><span class="platform-color orange"></span> Points <span class="tips">+50/100/150+</span></div>
+        <div class="platform-type"><span class="platform-color gray"></span> <span class="warning">Spikes!</span></div>
+      </div>
+      
+      <div class="advanced-tip">
+        <span class="mechanic">↗️ Jump diagonally</span>
+        <span class="mechanic">↩️ Bounce off walls</span>
+        <span class="mechanic">🔄 Chain bounces</span>
+      </div>
+      <div class="tips">Pro tip: Hold direction while jumping to maintain momentum</div>
+      <div class="warning">⚠️ Beware of gray spike platforms! They stun you for 2 seconds!</div>
+    </div>
+  </div>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html> 
